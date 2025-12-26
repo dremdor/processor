@@ -1,0 +1,75 @@
+; max of N bytes: array [0x80..0x80+N], N [0x70], result [0x72]
+.org 0x00
+
+LOAD 0x7E ; base
+STORE 0x73 ; ptr
+
+LOADI 0x73 ; *ptr
+STORE 0x72 ; max
+
+LOAD 0x7F ; const 1
+STORE 0x71 ; i
+
+loop:
+LOAD 0x71 ; i
+CMP 0x70 ; i cmp N
+JZ end
+
+LOAD 0x73 ; ptr
+ADD 0x7F ; + 1
+STORE 0x73 ; ptr++
+
+LOADI 0x73 ; *ptr
+STORE 0x74 ; cur
+
+LOAD 0x74 ; cur
+CMP 0x72 ; max
+JG setmax
+JMP cont
+
+setmax:
+STORE 0x72 ; max=cur
+
+cont:
+LOAD 0x71 ; i
+ADD 0x7F ; + 1
+STORE 0x71 ; i++
+
+JMP loop
+
+end:
+HLT
+
+; memory:
+; 0x70 N
+; 0x71 i
+; 0x72 max
+; 0x73 ptr
+; 0x74 cur
+; 0x7E base
+; 0x7F one
+; 0x80.. array
+
+.org 0x70
+.db 2
+
+.org 0x71
+.db 0
+
+.org 0x72
+.db 0
+
+.org 0x73
+.db 0
+
+.org 0x74
+.db 0
+
+.org 0x7E
+.db 0x80
+
+.org 0x7F
+.db 1
+
+.org 0x80
+.db 1, 1, 7, 42, 250, 9, 13, 1

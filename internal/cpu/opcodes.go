@@ -1,0 +1,22 @@
+package cpu
+
+const (
+	OP_LOAD  = 0x01
+	OP_STORE = 0x02
+	OP_ADD   = 0x03
+	OP_SUB   = 0x04
+	OP_CMP   = 0x05
+	OP_AND   = 0x06
+	OP_OR    = 0x07
+
+	OP_JMP = 0x08
+	OP_JZ  = 0x09
+	OP_JNZ = 0x0A
+	OP_JG  = 0x0B
+	OP_JL  = 0x0C
+
+	OP_LOADI  = 0x0D
+	OP_STOREI = 0x0E
+
+	OP_HLT = 0xFF
+)

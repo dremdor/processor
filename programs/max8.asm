@@ -1,0 +1,65 @@
+; max of 8 bytes: array[0x80..0x87] -> max [0x72]
+.org 0x00
+
+LOAD 0x80
+STORE 0x72
+
+LOAD 0x81
+CMP 0x72
+JG set1
+JMP after1
+set1: STORE 0x72
+after1:
+
+LOAD 0x82
+CMP 0x72
+JG set2
+JMP after2
+set2: STORE 0x72
+after2:
+
+LOAD 0x83
+CMP 0x72
+JG set3
+JMP after3
+set3: STORE 0x72
+after3:
+
+LOAD 0x84
+CMP 0x72
+JG set4
+JMP after4
+set4: STORE 0x72
+after4:
+
+LOAD 0x85
+CMP 0x72
+JG set5
+JMP after5
+set5: STORE 0x72
+after5:
+
+LOAD 0x86
+CMP 0x72
+JG set6
+JMP after6
+set6: STORE 0x72
+after6:
+
+LOAD 0x87
+CMP 0x72
+JG set7
+JMP end
+set7: STORE 0x72
+
+end: HLT
+
+; memory:
+; 0x72 max
+; 0x80..0x87 array
+
+.org 0x72
+.db 0
+
+.org 0x80
+.db 6, 120, 7, 42, 250, 9, 13, 1
